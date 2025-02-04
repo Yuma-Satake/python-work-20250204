@@ -3,42 +3,43 @@
 #｜＿htmlを生成する以下のソースのリンク先を自分の好きなサイトに変更する
 #/////////////////////////////////////////////////////////////////////
 
-#----------------------------------------------------------------------strat
+#----------------------------------------------------------------------start
 #HTML基本タグを生成するデコレータ関数
 #---------------------------------------
 def html(func):
-    def wrapper(*args,**kargs):
-        return "<html>\n"+str(func(*args,**kargs))+"\n</html>"
+    def wrapper(*args, **kwargs):
+        return "<html>\n" + str(func(*args, **kwargs)) + "\n</html>"
     return wrapper
 #---------------------------------------
 def head(arg):
     def decorator(func):
         def wrapper(*args, **kwargs):
-            return "<head><title>"+arg+"</title></head>\n"+str(func(*args, **kwargs))
+            return "<head><title>" + arg + "</title></head>\n" + str(func(*args, **kwargs))
         return wrapper
     return decorator
 #---------------------------------------
 def body(func):
-    def wrapper(*args,**kargs):
-        return "<body bgcolor='lavender'>\n"+str(func(*args,**kargs))+"</body>"
+    def wrapper(*args, **kwargs):
+        return "<body bgcolor='lavender'>\n" + str(func(*args, **kwargs)) + "</body>"
     return wrapper
 #---------------------------------------
 def p(func):
-    def wrapper(*args,**kargs):
-        return "<p>"+str(func(*args,**kargs))+"</p>\n"
+    def wrapper(*args, **kwargs):
+        return "<p>" + str(func(*args, **kwargs)) + "</p>\n"
     return wrapper
 #---------------------------------------
 def a(func):
-    def wrapper(*args,**kargs):
-        return "<a href='#'>"+str(func(*args,**kargs))+"</a>"
+    def wrapper(*args, **kwargs):
+        # リンク先を自分の好きなサイト（例: GitHub）に変更
+        return "<a href='https://www.github.com'>" + str(func(*args, **kwargs)) + "</a>"
     return wrapper
 #----------------------------------------------------------------------end
 
 #---------------------------------------
 #HTMLファイルとしてカレントに書き出し関数
 #---------------------------------------
-def out_file(IDX,arg):
-    with open(IDX,mode="w",encoding="utf-8") as f:
+def out_file(IDX, arg):
+    with open(IDX, mode="w", encoding="utf-8") as f:
         f.write(arg)
 
 #---------------------------------------
@@ -56,9 +57,7 @@ def content(txt):
 #////////////////////////////////////////////////
 #実行
 #////////////////////////////////////////////////
-#print(content("リンク先"))#use_test
-IDX="index_def.html"
-txt=content("リンク先:test_def")  #HTMLの生成
-#print(txt)#use_debug
-out_file(IDX,txt)                #出力
+IDX = "index_def.html"
+txt = content("GitHub")  #HTMLの生成
+out_file(IDX, txt)       #出力
 #////////////////////////////////////////////////
